@@ -111,15 +111,17 @@ def populate_stations(entities):
             stop_id = str(stop_time_update.stop_id).strip()[:-1]
             station_name = str(get_station_name(stop_id,station_names))
             train_direction = str(stop_time_update.stop_id).strip()[-1:]
-            arrival_time = str(stop_time_update.arrival).strip()[6:]
+            departure_time = str(stop_time_update.departure).strip()[6:]
 
-            if train_direction == "N":
-                stations[station_name].add_north(int(arrival_time))
-            elif train_direction == "S":
-                stations[station_name].add_south(int(arrival_time))
-            else:
-                # Should never happen since train 
-                # is either "N" bound or "S" bound
-                assert False
+            if departure_time != "":
+                # if there is an arrival time (it is not the first stop)
+                if train_direction == "N":
+                    stations[station_name].add_north(int(departure_time))
+                elif train_direction == "S":
+                    stations[station_name].add_south(int(departure_time))
+                else:
+                    # Should never happen since train 
+                    # is either "N" bound or "S" bound
+                    assert False
 
     return stations

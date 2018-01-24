@@ -6,27 +6,27 @@ class Station:
     Class used to represent an MTA train station
     ## Member Variables
         station_name -> name of the station
-        north_bound_arriving_in -> used to keep track of the times
-                                    for arriving north bound trains
-        south_bound_arriving_in -> used to keep track of the times
-                                    for arriving south bound trains
+        north_bound_departing_in -> used to keep track of the times
+                                    for departing north bound trains
+        south_bound_departing_in -> used to keep track of the times
+                                    for departing south bound trains
     '''
     def __init__(self, station_name):
         self.station_name = station_name
-        self.north_bound_arriving_in = []
-        self.south_bound_arriving_in = []
+        self.north_bound_departing_in = []
+        self.south_bound_departing_in = []
 
     def add_north(self, time):
         '''
-        Add a time to the list of north bound arriving times
+        Add a time to the list of north bound departing times
         '''
-        self.north_bound_arriving_in.append(time)
+        self.north_bound_departing_in.append(time)
 
     def add_south(self, time):
         '''
-        Add a time to the list of north bound arriving times
+        Add a time to the list of north bound departing times
         '''
-        self.south_bound_arriving_in.append(time)
+        self.south_bound_departing_in.append(time)
 
     def get_name(self):
         '''
@@ -38,13 +38,13 @@ class Station:
         '''
         Return the list of times for arriving north bound trains
         '''
-        return sorted(self.north_bound_arriving_in)
+        return sorted(self.north_bound_departing_in)
 
     def get_souths(self):
         '''
         Return the list of times for arriving south bound trains
         '''
-        return sorted(self.south_bound_arriving_in)
+        return sorted(self.south_bound_departing_in)
 
     def show(self):
         '''
@@ -53,10 +53,10 @@ class Station:
         to_print = ""
         to_print += self.station_name + "\n"
         to_print += "North Bound:\n"
-        for time in sorted(self.north_bound_arriving_in):
+        for time in sorted(self.north_bound_departing_in):
             to_print += str(self.__time_diff(time)) + " "
         to_print += "\nSouth Bound:\n"
-        for time in sorted(self.south_bound_arriving_in):
+        for time in sorted(self.south_bound_departing_in):
             to_print += str(self.__time_diff(time)) + " "
         print to_print
 
