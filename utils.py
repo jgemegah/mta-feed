@@ -1,3 +1,4 @@
+from argparse import ArgumentParser, RawTextHelpFormatter
 from csv import reader
 from google.transit import gtfs_realtime_pb2
 from time import time
@@ -9,6 +10,55 @@ from classes import Stations
 
 
 mta_api_key = #INSERT API KEY HERE
+
+# Global dictionary defining currently supported train lines
+# Key = train line
+# Value = url id
+lines = {'1' : 1,
+         '2' : 1,
+         '3' : 1,
+         '4' : 1,
+         '5' : 1,
+         'S' : 1,
+         'A' : 26,
+         'C' : 26,
+         'E' : 26,
+         'N' : 16,
+         'Q' : 16,
+         'R' : 16,
+         'W' : 16,
+         'B' : 21,
+         'D' : 21,
+         'F' : 21,
+         'M' : 21,
+         'L' : 2,
+         'SIR' : 11,
+         'G' : 31,
+         'J' : 36,
+         'Z' : 36}
+
+def parseArguments():
+    parser = ArgumentParser(description='Get the arrival times for trains.\n' +
+                                        'Currently supports the following lines: \n'
+                                        '1 2 3 4 5 \n'
+                                        'S \n'
+                                        'A C E \n'
+                                        'N Q R W \n'
+                                        'B D F M \n'
+                                        'L \n'
+                                        'SIR \n'
+                                        'G \n'
+                                        'J Z \n', 
+                            formatter_class = RawTextHelpFormatter)
+    parser.add_argument('train_line', type=str, nargs=1, help='One of the supported train lines')
+    args = parser.parse_args()
+    line = args.train_line[0].upper()
+
+    if line not in lines:
+        print "Train line not supported!!!"
+        exit();
+
+    return line
 
 def get_stations():
     '''
@@ -48,31 +98,6 @@ def get_entities_for(train_line):
     extracts only the train line requested in the train_line
     argument
     '''
-
-    # Key = train line
-    # Value = url id
-    lines = {'1' : 1,
-             '2' : 1,
-             '3' : 1,
-             '4' : 1,
-             '5' : 1,
-             'S' : 1,
-             'A' : 26,
-             'C' : 26,
-             'E' : 26,
-             'N' : 16,
-             'Q' : 16,
-             'R' : 16,
-             'W' : 16,
-             'B' : 21,
-             'D' : 21,
-             'F' : 21,
-             'M' : 21,
-             'L' : 2,
-             'SIR' : 11,
-             'G' : 31,
-             'J' : 36,
-             'Z' : 36}
 
     # Check to make sure feed data is available for that line
     if train_line not in lines:
