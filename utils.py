@@ -9,7 +9,7 @@ from classes import Station
 from classes import Stations
 
 
-mta_api_key = #INSERT API KEY HERE
+mta_api_key = #INSERT API KEY HERE"
 
 # Global dictionary defining currently supported train lines
 # Key = train line
@@ -19,6 +19,7 @@ lines = {'1' : 1,
          '3' : 1,
          '4' : 1,
          '5' : 1,
+         '6' : 1,
          'S' : 1,
          'A' : 26,
          'C' : 26,
@@ -40,7 +41,7 @@ lines = {'1' : 1,
 def parseArguments():
     parser = ArgumentParser(description='Get the arrival times for trains.\n' +
                                         'Currently supports the following lines: \n'
-                                        '1 2 3 4 5 \n'
+                                        '1 2 3 4 5 6 \n'
                                         'S \n'
                                         'A C E \n'
                                         'N Q R W \n'
