@@ -86,7 +86,7 @@ def get_entities_for(train_line):
     feed.ParseFromString(response.content)
 
     entities = []
-    for entity in feed.entity:
+    for entity in reversed(feed.entity):
         if entity.HasField('trip_update'):
             if entity.trip_update.trip.route_id == train_line:
                 entities.append(entity)

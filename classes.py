@@ -1,4 +1,5 @@
 from time import time
+from collections import OrderedDict
 
 class Station:
     '''
@@ -74,13 +75,13 @@ class Stations:
         stations -> a dictionary of station name/Station pairs
     '''
     def __init__(self):
-        self.stations = {}
+        self.stations = OrderedDict()
 
     def show(self):
         '''
         Print all the stations held by this class
         '''
-        for station in sorted(self.stations):
+        for station in self.stations:
             self.stations[station].show()
             print
 
